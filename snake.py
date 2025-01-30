@@ -1,24 +1,28 @@
 import pygame, sys, time, random
 
+#Inicialización de Pygame
 pygame.init()
 
+#Tamaño de ventana de juego
 play_surface = pygame.display.set_mode((500, 500))
 
+#Tipografía 
 font = pygame.font.Font(None, 30)
 
+#Reloj para controlar los fps
 fps = pygame.time.Clock()
 
-
+#Función para generar aleatoriamente la "comida"
 def food():
     random_pos = random.randint(0,49)*10
     food_pos = [random_pos, random_pos]
     return food_pos
 
-
+#Función principal del juego
 def main():
 
     snake_pos = [100, 50]
-    snake_body = [[100,50],[90,50],[80,50]]
+    snake_body = [[100,250],[90,250],[80,250]]
     change = "RIGHT"
     run = True
     food_pos = food()
@@ -38,6 +42,8 @@ def main():
                     change = "UP"
                 if event.key == pygame.K_DOWN:
                     change = "DOWN"
+
+#Movimiento de la serpiente                    
         if change == "RIGHT":
             snake_pos[0] += 10
         if change == "LEFT":
@@ -47,15 +53,18 @@ def main():
         if change == "DOWN":
             snake_pos[1] += 10
 
+#Se inserta nueva posición de la cabeza
         snake_body.insert(0, list(snake_pos))
 
+#Cuando la serpiente "come" la comida se añade un segmento a ella misma
         if snake_pos == food_pos:
             food_pos = food()
             score += 1
             print(score)
         else:
             snake_body.pop()
-        
+
+#comprobar colisión con ella misma        
         head = snake_body[-1]
         for i in range(len(snake_body) - 1): 
             part = snake_body[i]
@@ -73,6 +82,7 @@ def main():
         text = font.render(str(score),0,(200,60,80))
         play_surface.blit(text, (480,20))
 
+#Velocidades según el nivel
         if score < 10:
             fps.tick(10)
         if score >= 10:
@@ -82,6 +92,7 @@ def main():
         if score >= 30:
             fps.tick(25)
 
+# Comprobar colisión con los bordes
         if snake_pos[0] <= 0 or snake_pos[0] >= 500:
             run = False
             print("YOU LOSE")
@@ -89,6 +100,7 @@ def main():
             run = False
             print("YOU LOSE")
 
+#Actualizar pantalla
         pygame.display.flip()
 
 main()
