@@ -77,10 +77,10 @@ def main():
 
 #Cuerpo de la serpiente
         for pos in snake_body:
-            pygame.draw.rect(play_surface,(200,200,200), pygame.Rect(pos[0], pos[1], 10, 10))
+            pygame.draw.rect(play_surface,(200,200,200), pygame.Rect(pos[0], pos[1], 12, 12))
 
 #Dibujo de la comida        
-        pygame.draw.rect(play_surface,(169,6,6), pygame.Rect(food_pos[0], food_pos[1], 10, 10))
+        pygame.draw.rect(play_surface,(169,6,6), pygame.Rect(food_pos[0], food_pos[1], 12, 12))
 
 #Puntuación
         text = font.render(str(score),0,(200,60,80))
