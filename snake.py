@@ -72,13 +72,17 @@ def main():
                 run = False
                 print("YOU LOSE")
 
+#Pantalla limpia
         play_surface.fill((0,0,0))
 
+#Cuerpo de la serpiente
         for pos in snake_body:
             pygame.draw.rect(play_surface,(200,200,200), pygame.Rect(pos[0], pos[1], 10, 10))
-        
+
+#Dibujo de la comida        
         pygame.draw.rect(play_surface,(169,6,6), pygame.Rect(food_pos[0], food_pos[1], 10, 10))
-        
+
+#Puntuación
         text = font.render(str(score),0,(200,60,80))
         play_surface.blit(text, (480,20))
 
